@@ -1,5 +1,6 @@
 require 'gosu'
 require_relative 'player'
+require_relative 'bullet'
 require_relative 'enemy'
 
 WIDTH = 800
@@ -17,11 +18,13 @@ class SectorFive < Gosu::Window
     self.caption = TEXT[:caption]
     @player = Player.new(self)
     @enemies = []
+    @bullets = []
   end
 
   def draw
     @player.draw
     @enemies.each(&:draw)
+    @bullets.each(&:draw)
   end
 
   def update
@@ -31,6 +34,13 @@ class SectorFive < Gosu::Window
     @player.move
     @enemies.push Enemy.new(self) if rand < ENEMY_FREQUENCY
     @enemies.each(&:move)
+    @bullets.each(&:move)
+  end
+
+  def button_down(id)
+    if id == Gosu::KbSpace
+      @bullets.push Bullet.new(self, @player.x, @player.y, @player.angle)
+    end
   end
 end
 

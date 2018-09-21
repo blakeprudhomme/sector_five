@@ -6,6 +6,8 @@ class Player
   IMAGE_RADIUS = 20
   IMAGE_WIDTH = 27
 
+  attr_reader :x, :y, :angle, :radius
+
   def initialize(window)
     @window = window
     @x = center_x
