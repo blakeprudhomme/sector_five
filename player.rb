@@ -39,9 +39,9 @@ class Player
     @y += @velocity_y
     @velocity_x *= FRICTION
     @velocity_y *= FRICTION
-    set_right_boundry
-    set_left_boundry
-    set_bottom_boundry
+    set_right_boundary
+    set_left_boundary
+    set_bottom_boundary
   end
 
   private
@@ -50,20 +50,23 @@ class Player
     (@window.width / 2) - (IMAGE_WIDTH / 2)
   end
 
-  def set_right_boundry
+  def set_right_boundary
     return unless @x > (@window.width - @radius)
+
     @velocity_x = 0
     @x = @window.width - @radius
   end
 
-  def set_left_boundry
+  def set_left_boundary
     return unless @x < @radius
+
     @velocity_x = 0
     @x = @radius
   end
 
-  def set_bottom_boundry
+  def set_bottom_boundary
     return unless @y > (@window.height - @radius)
+
     @velocity_y = 0
     @y = @window.height - @radius
   end

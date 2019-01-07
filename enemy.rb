@@ -3,6 +3,8 @@ class Enemy
   SPEED = 4
   IMAGE_RADIUS = 20
 
+  attr_reader :x, :y, :radius
+
   def initialize(window)
     @image = Gosu::Image.new('images/enemy.png')
     @radius = IMAGE_RADIUS

@@ -35,11 +35,26 @@ class SectorFive < Gosu::Window
     @enemies.push Enemy.new(self) if rand < ENEMY_FREQUENCY
     @enemies.each(&:move)
     @bullets.each(&:move)
+    detect_collisions
   end
 
   def button_down(id)
     if id == Gosu::KbSpace
       @bullets.push Bullet.new(self, @player.x, @player.y, @player.angle)
+    end
+  end
+
+  private
+
+  def detect_collisions
+    @enemies.dup.each do |enemy|
+      @bullets.dup.each do |bullet|
+        distance = Gosu.distance(enemy.x, enemy.y, bullet.x, bullet.y)
+        if distance < enemy.radius + bullet.radius
+          @enemies.delete(enemy)
+          @bullets.delete(bullet)
+        end
+      end
     end
   end
 end
